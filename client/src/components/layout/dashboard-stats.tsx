@@ -1,67 +1,54 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 import { Link } from "wouter";
+import { Leaf, Sprout, Sun, Newspaper, MessageSquare } from "lucide-react";
 
-const mockData = {
-  soilHealth: [
-    { month: "Jan", value: 65 },
-    { month: "Feb", value: 70 },
-    { month: "Mar", value: 75 },
-    { month: "Apr", value: 72 },
-    { month: "May", value: 80 },
-    { month: "Jun", value: 85 },
-  ],
-  predictions: [
-    { name: "Plant Disease", count: 24, href: "/plant-disease" },
-    { name: "Seed Recommendation", count: 18, href: "/seed-recommendation" },
-    { name: "Seasonal Crop", count: 12, href: "/seasonal-crop" },
-  ],
-};
+const modules = [
+  { name: "Plant Disease Analysis", href: "/plant-disease", icon: Leaf },
+  { name: "Seed Recommendation", href: "/seed-recommendation", icon: Sprout },
+  { name: "Seasonal Crop Planning", href: "/seasonal-crop", icon: Sun },
+  { name: "Agricultural News", href: "/news", icon: Newspaper },
+  { name: "AI Farming Assistant", href: "/chatbot", icon: MessageSquare },
+];
 
-interface StatCardProps {
+const soilHealth = [
+  { month: "Jan", value: 65 },
+  { month: "Feb", value: 70 },
+  { month: "Mar", value: 75 },
+  { month: "Apr", value: 72 },
+  { month: "May", value: 80 },
+  { month: "Jun", value: 85 },
+];
+
+interface ModuleCardProps {
   title: string;
-  value: string | number;
-  description?: string;
-  loading?: boolean;
-  href?: string;
+  href: string;
+  icon: React.ElementType;
 }
 
-export function StatCard({ title, value, description, loading, href }: StatCardProps) {
-  const CardWrapper = href ? Link : "div";
+function ModuleCard({ title, href, icon: Icon }: ModuleCardProps) {
   return (
-    <CardWrapper href={href}>
-      <Card className={href ? "cursor-pointer transition-colors hover:bg-accent" : ""}>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {loading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <>
-              <div className="text-2xl font-bold">{value}</div>
-              {description && (
-                <p className="text-xs text-muted-foreground">{description}</p>
-              )}
-            </>
-          )}
+    <Link href={href}>
+      <Card className="cursor-pointer transition-colors hover:bg-accent">
+        <CardContent className="flex items-center gap-3 pt-6">
+          <Icon className="h-6 w-6 text-primary" />
+          <h3 className="font-medium">{title}</h3>
         </CardContent>
       </Card>
-    </CardWrapper>
+    </Link>
   );
 }
 
 export function SoilHealthChart() {
   return (
-    <Card className="col-span-3">
+    <Card className="col-span-2">
       <CardHeader>
         <CardTitle>Soil Health Trend</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={mockData.soilHealth}>
+            <AreaChart data={soilHealth}>
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
@@ -82,21 +69,15 @@ export function SoilHealthChart() {
 
 export function DashboardStats() {
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {mockData.predictions.map((pred) => (
-        <StatCard
-          key={pred.name}
-          title={pred.name}
-          value={pred.count}
-          description="Total predictions"
-          href={pred.href}
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {modules.map((module) => (
+        <ModuleCard
+          key={module.name}
+          title={module.name}
+          href={module.href}
+          icon={module.icon}
         />
       ))}
-      <StatCard
-        title="Soil Health Score"
-        value="85%"
-        description="Current rating"
-      />
     </div>
   );
 }
