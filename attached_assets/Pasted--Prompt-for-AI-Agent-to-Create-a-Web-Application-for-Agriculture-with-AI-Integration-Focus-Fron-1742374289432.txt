@@ -1,0 +1,105 @@
+*Prompt for AI Agent to Create a Web Application for Agriculture with AI Integration*  
+(Focus: Frontend, Backend, Module Scaffolding, and API Integration)  
+
+---
+
+### *Objective*  
+Create a full-stack web application focused on *AI-driven agriculture solutions* with modules for crop prediction, soil analysis, news aggregation, and a chatbot. The AI/ML/DL/LLM models will be manually integrated later, so focus on building the framework, UI/UX, and API endpoints ready for model deployment.
+
+---
+
+### *Application Structure*  
+*1. Core Pages*  
+- *Login/Signup Page*:  
+  - Modern design with agriculture-themed visuals (e.g., crops, soil).  
+  - Email/password authentication + Google/Facebook OAuth.  
+  - Input validation (e.g., password strength, email format).  
+  - Forgot password flow.  
+
+*2. Modules*  
+- *Dashboard*:  
+  - Overview of all modules (stats, quick-access widgets).  
+  - Visualizations: Charts/graphs for soil health trends, temperature data, etc.  
+  - Recent news headlines (linked to the News Module).  
+
+- *Plant Disease Prediction Module*:  
+  - UI: Upload image of plant leaves + input fields (location, soil type).  
+  - Display prediction results (mock data until model integration).  
+  - API endpoint: /api/predict/plant-disease (POST).  
+
+- *Seed Recommendation Module*:  
+  - Inputs: Soil pH, temperature, region, rainfall.  
+  - Output: List of recommended seeds (card-based UI).  
+  - API endpoint: /api/predict/seed (POST).  
+
+- *Seasonal Crop Prediction Module*:  
+  - Dynamic form for soil NPK values, historical weather data, region.  
+  - Output: Best crops for the season + confidence score.  
+  - API endpoint: /api/predict/season-crop (POST).  
+
+- *Agriculture News Module*:  
+  - Fetch latest news via third-party API (e.g., NewsAPI).  
+  - Category filters (e.g., organic farming, AI in agriculture).  
+  - Bookmarking functionality.  
+
+- *Chatbot Module*:  
+  - UI: Chat interface with message history.  
+  - Preprocess user queries (e.g., "How to improve soil fertility?").  
+  - API endpoint: /api/chatbot (POST) (to connect to LLM later).  
+
+---
+
+### *Technical Requirements*  
+*Frontend*:  
+- Framework: React.js (with TypeScript) or Angular.  
+- State Management: Redux or Context API.  
+- Styling: Responsive design using CSS-in-JS (Styled Components) or Tailwind.  
+- Charts: D3.js or Recharts.  
+
+*Backend*:  
+- Framework: Django (Python) or Express.js (Node.js).  
+- Database: PostgreSQL/MySQL for user data + MongoDB for unstructured data (e.g., chat logs).  
+- Authentication: JWT tokens + OAuth2.  
+- API Design: RESTful endpoints with Swagger/OpenAPI documentation.  
+
+*Additional Features*:  
+- Role-based access control (farmers vs. agronomists).  
+- File upload for plant disease images (AWS S3 or Firebase Storage).  
+- Notifications (e.g., prediction results via email).  
+
+---
+
+### *Deliverables*  
+1. *Frontend*:  
+   - Responsive UI with all modules.  
+   - Mock data for predictions/chatbot.  
+   - API integration tests (Axios/Fetch).  
+
+2. *Backend*:  
+   - Secure authentication flow.  
+   - API routes for all modules (connected to dummy logic).  
+   - Database schemas (e.g., User, PredictionHistory, ChatSession).  
+
+3. *Documentation*:  
+   - API specification (Postman/Swagger).  
+   - Setup guide (Dockerfile, environment variables).  
+
+---
+
+### *Non-Functional Requirements*  
+- Scalability: Containerize with Docker for easy deployment.  
+- Security: HTTPS, input sanitization, rate limiting.  
+- Performance: Caching for news articles/weather data.  
+
+---
+
+### *Example Workflow*  
+1. User logs in and views dashboard with soil health stats.  
+2. Navigates to Seed Recommendation, inputs soil data, and receives AI-driven suggestions.  
+3. Asks the chatbot, “What crops grow best in 30°C temperature?” (API sends query to future LLM).  
+
+---
+
+*Note*: Avoid implementing actual ML/DL models. Use placeholder functions (e.g., return random crop names) and ensure the backend/frontend can ingest model outputs later.  
+
+Let me know if you need refinements! 🌱
