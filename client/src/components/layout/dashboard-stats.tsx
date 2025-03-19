@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import { Link } from "wouter";
 
 const mockData = {
   soilHealth: [
@@ -12,9 +13,9 @@ const mockData = {
     { month: "Jun", value: 85 },
   ],
   predictions: [
-    { name: "Plant Disease", count: 24 },
-    { name: "Seed Recommendation", count: 18 },
-    { name: "Seasonal Crop", count: 12 },
+    { name: "Plant Disease", count: 24, href: "/plant-disease" },
+    { name: "Seed Recommendation", count: 18, href: "/seed-recommendation" },
+    { name: "Seasonal Crop", count: 12, href: "/seasonal-crop" },
   ],
 };
 
@@ -23,27 +24,31 @@ interface StatCardProps {
   value: string | number;
   description?: string;
   loading?: boolean;
+  href?: string;
 }
 
-export function StatCard({ title, value, description, loading }: StatCardProps) {
+export function StatCard({ title, value, description, loading, href }: StatCardProps) {
+  const CardWrapper = href ? Link : "div";
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <>
-            <div className="text-2xl font-bold">{value}</div>
-            {description && (
-              <p className="text-xs text-muted-foreground">{description}</p>
-            )}
-          </>
-        )}
-      </CardContent>
-    </Card>
+    <CardWrapper href={href}>
+      <Card className={href ? "cursor-pointer transition-colors hover:bg-accent" : ""}>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <>
+              <div className="text-2xl font-bold">{value}</div>
+              {description && (
+                <p className="text-xs text-muted-foreground">{description}</p>
+              )}
+            </>
+          )}
+        </CardContent>
+      </Card>
+    </CardWrapper>
   );
 }
 
@@ -84,6 +89,7 @@ export function DashboardStats() {
           title={pred.name}
           value={pred.count}
           description="Total predictions"
+          href={pred.href}
         />
       ))}
       <StatCard
