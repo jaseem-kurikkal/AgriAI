@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Plant } from "lucide-react";
+import { Loader2, Leaf } from "lucide-react";
 
 export default function AuthPage() {
   const { user, loginMutation, registerMutation } = useAuth();
@@ -25,7 +25,7 @@ export default function AuthPage() {
         <div className="flex flex-col justify-center">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-green-800 flex items-center gap-2">
-              <Plant className="h-8 w-8" />
+              <Leaf className="h-8 w-8" />
               AgriAI
             </h1>
             <p className="mt-2 text-lg text-green-700">

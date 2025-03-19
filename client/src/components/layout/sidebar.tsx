@@ -3,9 +3,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import {
-  Plant,
   Leaf,
-  Seedling,
+  Sprout,
   Sun,
   Newspaper,
   MessageSquare,
@@ -16,7 +15,7 @@ import {
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Plant Disease", href: "/plant-disease", icon: Leaf },
-  { name: "Seed Recommendation", href: "/seed-recommendation", icon: Seedling },
+  { name: "Seed Recommendation", href: "/seed-recommendation", icon: Sprout },
   { name: "Seasonal Crop", href: "/seasonal-crop", icon: Sun },
   { name: "News", href: "/news", icon: Newspaper },
   { name: "AI Assistant", href: "/chatbot", icon: MessageSquare },
@@ -30,7 +29,7 @@ export function Sidebar() {
     <div className="flex h-screen flex-col gap-y-5 bg-sidebar border-r border-sidebar-border p-4">
       <div className="flex h-16 shrink-0 items-center">
         <Link href="/" className="flex items-center gap-2 text-sidebar-primary">
-          <Plant className="h-8 w-8" />
+          <Leaf className="h-8 w-8" />
           <span className="text-xl font-bold">AgriAI</span>
         </Link>
       </div>
