@@ -39,7 +39,7 @@ This will start:
 - Backend API server
 Both will be served on port 5000.
 
-Visit `http://localhost:5000` to view the application.
+Visit `http://localhost:5001` to view the application.
 
 ## Building for Production
 

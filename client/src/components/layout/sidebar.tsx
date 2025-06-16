@@ -10,6 +10,7 @@ import {
   MessageSquare,
   LogOut,
   LayoutDashboard,
+  Microscope,
 } from "lucide-react";
 
 const navigation = [
@@ -19,6 +20,7 @@ const navigation = [
   { name: "Seasonal Crop", href: "/seasonal-crop", icon: Sun },
   { name: "News", href: "/news", icon: Newspaper },
   { name: "AI Assistant", href: "/chatbot", icon: MessageSquare },
+  { name: "AI Analysis", href: "/ai-analysis", icon: Microscope },
 ];
 
 export function Sidebar() {

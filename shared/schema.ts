@@ -7,6 +7,8 @@ export const users = pgTable("users", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   fullName: text("full_name"),
+  email: text("email").notNull().unique(),
+  phone: text("phone").notNull(),
   role: text("role").default("farmer"),
 });
 
@@ -27,11 +29,21 @@ export const chatMessages = pgTable("chat_messages", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-  fullName: true,
-});
+export const insertUserSchema = createInsertSchema(users)
+  .pick({
+    username: true,
+    password: true,
+    fullName: true,
+    email: true,
+    phone: true,
+  })
+  .extend({
+    email: z.string().email("Please enter a valid email address").refine(
+      (email) => email.toLowerCase().endsWith("@gmail.com"),
+      "Please use a Gmail address"
+    ),
+    phone: z.string().min(10, "Phone number must be at least 10 digits").max(15, "Phone number is too long")
+  });
 
 export const insertPredictionSchema = createInsertSchema(predictions).pick({
   type: true,

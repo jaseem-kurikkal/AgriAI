@@ -29,8 +29,19 @@ export class MemStorage implements IStorage {
     this.chatMessages = new Map();
     this.currentId = 1;
     this.sessionStore = new MemoryStore({
-      checkPeriod: 86400000,
+      checkPeriod: 86400000, // 24 hours
+      stale: false,
     });
+    
+    // Create a test user for development
+    const testUser = {
+      id: this.currentId++,
+      username: "test",
+      password: "test",
+      fullName: "Test User",
+      role: "farmer" as const,
+    };
+    this.users.set(testUser.id, testUser);
   }
 
   async getUser(id: number): Promise<User | undefined> {

@@ -99,8 +99,12 @@ export default function News() {
                       <span className="text-muted-foreground">
                         {new Date(article.date).toLocaleDateString()}
                       </span>
-                      <Button variant="link" className="p-0">
-                        Read More
+                      <Button
+                        variant="link"
+                        className="text-primary"
+                        onClick={() => window.open(article.url, '_blank')}
+                      >
+                        Read more
                       </Button>
                     </div>
                   </CardContent>
